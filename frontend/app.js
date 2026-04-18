@@ -12,7 +12,7 @@ async function getResult() {
   let interest = document.getElementById("interest").value;
   let skill = document.getElementById("skill").value;
 
-  let response = await fetch("http://127.0.0.1:8000/get-career", {
+  let response = await fetch("https://gethired-r3ho.onrender.com/get-career", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -45,7 +45,7 @@ async function uploadResume() {
   let formData = new FormData();
   formData.append("file", file);
 
-  let response = await fetch("http://127.0.0.1:8000/analyze-resume", {
+  let response = await fetch("https://gethired-r3ho.onrender.com/analyze-resume", {
     method: "POST",
     body: formData,
   });
@@ -64,7 +64,7 @@ async function uploadResume() {
 async function unlock() {
   try {
     // 1. Create order from backend
-    let res = await fetch("http://127.0.0.1:8000/create-order", {
+    let res = await fetch("https://gethired-r3ho.onrender.com/create-order", {
       method: "POST"
     });
 
