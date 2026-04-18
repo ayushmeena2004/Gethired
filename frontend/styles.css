@@ -1,0 +1,37 @@
+body {
+  font-family: Arial;
+  text-align: center;
+  background: #0f172a;
+  color: white;
+}
+
+.container {
+  margin-top: 100px;
+}
+
+button {
+  padding: 10px 20px;
+  margin-top: 20px;
+  border: none;
+  background: #22c55e;
+  color: black;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.hidden {
+  display: none;
+}
+
+#scoreBox {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 20px;
+  color: #22c55e;
+}
+
+ul {
+  text-align: left;
+  max-width: 400px;
+  margin: auto;
+}

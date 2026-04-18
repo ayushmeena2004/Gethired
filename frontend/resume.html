@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Resume Analyzer</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>AI Resume Analyzer 🤖</h1>
+
+      <p>Upload your resume (PDF only)</p>
+
+      <input type="file" id="resumeFile" accept=".pdf" />
+      <button id="analyzeBtn" onclick="uploadResume()">Analyze</button>
+
+      <p id="loading" class="hidden">Analyzing resume... ⏳</p>
+
+      <h2>Resume Score</h2>
+      <div id="scoreBox"></div>
+
+      <h2>Suggestions</h2>
+      <ul id="suggestions"></ul>
+
+      <button onclick="unlock()">Unlock Full Report ₹49</button>
+    </div>
+
+    <script src="app.js"></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  </body>
+</html>

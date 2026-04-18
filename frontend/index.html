@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AI Job Accelerator</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="container">
+    <button onclick="goToResume()">Analyze Resume</button>
+    <h1>Confused About Your Career? 🤔</h1>
+    <button onclick="startQuiz()">Start Now</button>
+
+    <div id="quiz" class="hidden">
+      <h2>Answer These</h2>
+
+      <label>Interest:</label>
+      <select id="interest">
+        <option>Tech</option>
+        <option>Business</option>
+        <option>Creative</option>
+      </select>
+
+      <label>Skill:</label>
+      <select id="skill">
+        <option>Logic</option>
+        <option>Communication</option>
+        <option>Design</option>
+      </select>
+
+      <label>Goal:</label>
+      <select id="goal">
+        <option>Job</option>
+        <option>Freelance</option>
+        <option>Startup</option>
+      </select>
+
+      <button onclick="getResult()">Get Result</button>
+    </div>
+
+    <div id="result" class="hidden">
+      <h2 id="career"></h2>
+      <p id="desc"></p>
+
+      <button onclick="unlock()">Unlock Full Roadmap 🔒 (₹49)</button>
+    </div>
+    
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
