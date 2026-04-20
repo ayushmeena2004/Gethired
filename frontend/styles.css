@@ -35,3 +35,31 @@ ul {
   max-width: 400px;
   margin: auto;
 }
+
+
+#result {
+    background: #ffffff;
+    color: #000000;
+    padding: 30px;
+    border-radius: 10px;
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 30px auto;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+#result h1 {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+#result h2 {
+    font-size: 18px;
+    margin-top: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+#result ul {
+    padding-left: 20px;
+}

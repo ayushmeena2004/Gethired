@@ -136,32 +136,35 @@ def create_order():
     return order
 
 # Endpoint to handle resume rewriting (bonus feature)
+import pdfplumber
+from fastapi import FastAPI, File, UploadFile
+from textwrap import dedent  # <--- This is your best friend for prompts
+
 @app.post("/rewrite")
 async def rewrite_resume(file: UploadFile = File(...)):
     try:
         # Read PDF
         with pdfplumber.open(file.file) as pdf:
-            text = ""
-            for page in pdf.pages:
-                text += page.extract_text() or ""
+            text = "".join(page.extract_text() or "" for page in pdf.pages)
 
         if not text.strip():
             return {"error": "Could not extract text from PDF"}
 
-        # AI Prompt
+        # Using dedent allows you to indent the prompt so it looks good in VS Code
+        # but removes the leading whitespace before sending it to GROQ.
         prompt = f"""
-        You are an expert resume writer.
+Rewrite this resume in clean HTML format.
 
-        Rewrite the following resume to:
-        - Use strong action verbs
-        - Be ATS-friendly
-        - Improve clarity and impact
-        - Make bullet points more professional
-        - Keep it concise
+Rules:
+- Use <h1> for name
+- Use <h2> for section headings
+- Use <ul><li> for bullet points
+- No markdown (** or *)
+- Keep it ATS-friendly and professional
 
-        Resume:
-        {text}
-        """
+Resume:
+{text}
+"""
 
         # Call GROQ AI
         response = client.chat.completions.create(
@@ -170,8 +173,8 @@ async def rewrite_resume(file: UploadFile = File(...)):
         )
 
         rewritten = response.choices[0].message.content
-
-        return {"rewritten_resume": rewritten}
+        html_resume = rewritten.replace("\n", "<br>")
+        return {"rewritten_resume": html_resume}
 
     except Exception as e:
         return {"error": str(e)}

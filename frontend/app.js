@@ -135,7 +135,7 @@ function renderUI() {
 }
 
 async function rewriteResume() {
-    const fileInput = document.getElementById("resumeUpload");
+    const fileInput = document.getElementById("resumeFile");
     const file = fileInput.files[0];
 
     if (!file) {
@@ -159,7 +159,7 @@ async function rewriteResume() {
             return;
         }
 
-        document.getElementById("result").innerText = data.rewritten_resume;
+        document.getElementById("result").innerHTML = data.rewritten_resume;
 
     } catch (error) {
         console.error(error);
