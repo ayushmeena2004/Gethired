@@ -135,4 +135,43 @@ def create_order():
 
     return order
 
+# Endpoint to handle resume rewriting (bonus feature)
+@app.post("/rewrite")
+async def rewrite_resume(file: UploadFile = File(...)):
+    try:
+        # Read PDF
+        with pdfplumber.open(file.file) as pdf:
+            text = ""
+            for page in pdf.pages:
+                text += page.extract_text() or ""
 
+        if not text.strip():
+            return {"error": "Could not extract text from PDF"}
+
+        # AI Prompt
+        prompt = f"""
+        You are an expert resume writer.
+
+        Rewrite the following resume to:
+        - Use strong action verbs
+        - Be ATS-friendly
+        - Improve clarity and impact
+        - Make bullet points more professional
+        - Keep it concise
+
+        Resume:
+        {text}
+        """
+
+        # Call GROQ AI
+        response = client.chat.completions.create(
+            model="llama3-70b-8192",
+            messages=[{"role": "user", "content": prompt}]
+        )
+
+        rewritten = response.choices[0].message.content
+
+        return {"rewritten_resume": rewritten}
+
+    except Exception as e:
+        return {"error": str(e)}
