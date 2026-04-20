@@ -133,3 +133,36 @@ function renderUI() {
     list.appendChild(li);
   });
 }
+
+async function rewriteResume() {
+    const fileInput = document.getElementById("resumeUpload");
+    const file = fileInput.files[0];
+
+    if (!file) {
+        alert("Please upload a resume first");
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+        const response = await fetch("https://gethired-r3ho.onrender.com/rewrite", {
+            method: "POST",
+            body: formData
+        });
+
+        const data = await response.json();
+
+        if (data.error) {
+            alert(data.error);
+            return;
+        }
+
+        document.getElementById("result").innerText = data.rewritten_resume;
+
+    } catch (error) {
+        console.error(error);
+        alert("Something went wrong");
+    }
+}
